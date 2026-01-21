@@ -8,13 +8,52 @@
 <body>
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
-<tr><th colspan="8">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">3</td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num">39,975</td><td></td><td></td></tr>
+<tr><th colspan="8">EMI Calculator Test Suit</th></tr>
+<tr><td><a href="#t0">Tests</a></td><td class="num">1</td><td class="num">0</td><td class="num">0</td><td class="num attn">3</td><td class="num">155</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; passed</th></tr><tr class="passedeven"><td rowspan="3">testclasses.TestCases</td><td><a href="#m0">test_EmiCalculator</a></td><td rowspan="1">1681101789423</td><td rowspan="1">14040</td></tr><tr class="passedeven"><td><a href="#m1">test_carLoan</a></td><td rowspan="1">1681101778679</td><td rowspan="1">10499</td></tr><tr class="passedeven"><td><a href="#m2">test_homeLoan</a></td><td rowspan="1">1681101763848</td><td rowspan="1">13184</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">EMI Calculator Test Suit</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Tests &#8212; failed</th></tr><tr class="failedeven"><td rowspan="3">testclasses.TestCases</td><td><a href="#m0">test_EmiCalculator</a></td><td rowspan="1">1769016720871</td><td rowspan="1">2</td></tr><tr class="failedeven"><td><a href="#m1">test_carLoan</a></td><td rowspan="1">1769016720867</td><td rowspan="1">4</td></tr><tr class="failedeven"><td><a href="#m2">test_homeLoan</a></td><td rowspan="1">1769016720754</td><td rowspan="1">103</td></tr><tr><th colspan="4">Tests &#8212; passed</th></tr><tr class="passedeven"><td rowspan="1">com.cognizant_hackathon.team_gangadhar.AppTest</td><td><a href="#m3">shouldAnswerWithTrue</a></td><td rowspan="1">1769016720875</td><td rowspan="1">8</td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">testclasses.TestCases#test_EmiCalculator</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m1">testclasses.TestCases#test_carLoan</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
-<h3 id="m2">testclasses.TestCases#test_homeLoan</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h2>Tests</h2><h3 id="m0">testclasses.TestCases#test_EmiCalculator</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NoClassDefFoundError: Could not initialize class org.openqa.selenium.remote.http.ClientConfig
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:84)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:73)
+	at baseclasses.BaseTestClass.invokeBrowser(BaseTestClass.java:59)
+	at testclasses.TestCases.test_EmiCalculator(TestCases.java:78)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: dev/failsafe/Policy [in thread &quot;main&quot;]
+	at org.openqa.selenium.remote.http.ClientConfig.&lt;clinit&gt;(ClientConfig.java:33)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:84)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:73)
+	at baseclasses.BaseTestClass.invokeBrowser(BaseTestClass.java:59)
+	at testclasses.TestCases.test_homeLoan(TestCases.java:23)
+	... 27 more
+... Removed 26 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m1">testclasses.TestCases#test_carLoan</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NoClassDefFoundError: Could not initialize class org.openqa.selenium.remote.http.ClientConfig
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:84)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:73)
+	at baseclasses.BaseTestClass.invokeBrowser(BaseTestClass.java:59)
+	at testclasses.TestCases.test_carLoan(TestCases.java:50)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.ExceptionInInitializerError: Exception java.lang.NoClassDefFoundError: dev/failsafe/Policy [in thread &quot;main&quot;]
+	at org.openqa.selenium.remote.http.ClientConfig.&lt;clinit&gt;(ClientConfig.java:33)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:84)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:73)
+	at baseclasses.BaseTestClass.invokeBrowser(BaseTestClass.java:59)
+	at testclasses.TestCases.test_homeLoan(TestCases.java:23)
+	... 27 more
+... Removed 26 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m2">testclasses.TestCases#test_homeLoan</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NoClassDefFoundError: dev/failsafe/Policy
+	at org.openqa.selenium.remote.http.ClientConfig.&lt;clinit&gt;(ClientConfig.java:33)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:84)
+	at org.openqa.selenium.chrome.ChromeDriver.&lt;init&gt;(ChromeDriver.java:73)
+	at baseclasses.BaseTestClass.invokeBrowser(BaseTestClass.java:59)
+	at testclasses.TestCases.test_homeLoan(TestCases.java:23)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+Caused by: java.lang.ClassNotFoundException: dev.failsafe.Policy
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641)
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188)
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+	... 32 more
+... Removed 26 stack frames</div></td></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
+<h3 id="m3">com.cognizant_hackathon.team_gangadhar.AppTest#shouldAnswerWithTrue</h3><table class="result"><tr><th class="invisible"/></tr></table><p class="totop"><a href="#summary">back to summary</a></p>
 </body>
 </html>
