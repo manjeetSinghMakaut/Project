@@ -1,5 +1,4 @@
 baseclasses\PageBaseClass.class
-testclasses\TestCases.class
 baseclasses\BaseTestClass.class
 utilities\ExtentReportManager.class
 utilities\Constants.class

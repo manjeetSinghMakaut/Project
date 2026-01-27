@@ -1,7 +1,5 @@
 package com.cognizant_hackathon;
 
-import java.time.Duration;
-
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.PageFactory;
@@ -27,8 +25,10 @@ public class TestCases extends BaseTestClass {
 			System.out.println("🔧 SETTING UP BROWSER FOR TEST");
 			System.out.println("==========================================\n");
 			
-			// Setup Chrome browser
-			driver = new ChromeDriver();	
+			// Setup Chrome browser (Selenium Manager handles driver automatically)
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--remote-allow-origins=*");
+			driver = new ChromeDriver(options);
 			
 			// Initialize PageBaseClass
 			pageBaseClass = new PageBaseClass(driver);

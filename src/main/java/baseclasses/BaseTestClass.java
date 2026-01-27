@@ -27,17 +27,12 @@ public class BaseTestClass {
 		
 		try {
 			if (browserName.equalsIgnoreCase("firefox")) {
-				System.setProperty("webdriver.gecko.driver",
-						System.getProperty("user.dir") + "\\drivers\\geckodriver.exe");
 				driver = new FirefoxDriver();
 				System.out.println("Firefox browser opened successfully!");
 			} else if (browserName.equalsIgnoreCase("edge")) {
-				System.setProperty("webdriver.edge.driver",
-						System.getProperty("user.dir") + "\\drivers\\msedgedriver.exe");
 				driver = new EdgeDriver();
 				System.out.println("Edge browser opened successfully!");
 			} else {
-				System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
 				ChromeOptions options = new ChromeOptions();
 				options.addArguments("--remote-allow-origins=*");
 				driver = new ChromeDriver(options);
