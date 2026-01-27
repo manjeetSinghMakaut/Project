@@ -1,4 +1,4 @@
-package com.cognizant_hackathon;
+package com.cognizant;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;

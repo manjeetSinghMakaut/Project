@@ -3,7 +3,7 @@
 <suite name="EMI Calculator Test Suite">
   <test thread-count="5" name="Tests">
     <classes>
-      <class name="com.cognizant_hackathon.TestCases"/>
+      <class name="com.cognizant.TestCases"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

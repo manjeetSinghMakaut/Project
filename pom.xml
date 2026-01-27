@@ -7,11 +7,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cognizant_hackathon</groupId>
-    <artifactId>team_gangadhar</artifactId>
+    <groupId>com.cognizant</groupId>
+    <artifactId>team-4</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>team_gangadhar</name>
+    <name>team-4</name>
     <url>http://www.example.com</url>
 
     <properties>
