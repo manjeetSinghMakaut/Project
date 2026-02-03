@@ -6,7 +6,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 
 import baseclasses.PageBaseClass;
@@ -16,57 +15,46 @@ public class LoanCalculator extends PageBaseClass {
 
 	private JavascriptExecutor javascript;
 
+	// Locators - All xpaths and element identifiers at the top
+	private static final By AD_PARENT_IFRAME = By.xpath("//html/ins/div/iframe[contains(@id, 'aswift_')]");
+	private static final By AD_CHILD_IFRAME = By.id("ad_iframe");
+	private static final By DISMISS_AD_BUTTON = By.xpath("//div[@id='dismiss-button']/div");
+	private static final By LOAN_AMOUNT_TEXT_FIELD = By.id("loanamount");
+	private static final By LOAN_INTEREST_TEXT_FIELD = By.id("loaninterest");
+	private static final By LOAN_TENURE_TEXT_FIELD = By.id("loanterm");
+	private static final By FEES_TEXT_FIELD = By.id("loanfees");
+	private static final By LOAN_EMI_VALUE = By.xpath("//*[@id='loansummary-emi']/p/span");
+	private static final By LOAN_APR_VALUE = By.xpath("//*[@id='loansummary-apr']/p/span");
+	private static final By TOTAL_INTEREST_VALUE = By.xpath("//*[@id='loansummary-totalinterest']/p/span");
+	private static final By TOTAL_PAYMENT_VALUE = By.xpath("//*[@id='loansummary-totalamount']/p/span");
+	private static final By LOAN_PAYMENT_TABLE_HEADER_ROW = By.xpath("//*[@id='loanpaymenttable']/table/tbody/tr[1]");
+	private static final By LOAN_PAYMENT_TABLE_DATA_ROWS = By.xpath("//*[@id='loanpaymenttable']/table/tbody/tr[contains(@class, 'yearlypaymentdetails')]");
+	private static final By TABLE_HEADER_COLUMNS = By.xpath("//th");
+
+	WebElement adParent_iFrame;
+	WebElement adChild_iFrame;
+	WebElement dismissAdButton;
+	WebElement loanAmount_textField;
+	WebElement loanInterest_textField;
+	WebElement loanTenure_textField;
+	WebElement fees_textField;
+	WebElement loanEmi_value;
+	WebElement loanApr_value;
+	WebElement totalInterest_value;
+	WebElement totalPayment_value;
+	WebElement loanPaymentTable_headerRow;
+	List<WebElement> loanPaymentTable_dataRows;
+
 	public LoanCalculator(WebDriver driver) {
 		super(driver);
 		javascript = (JavascriptExecutor) driver;
 	}
 
-	@FindBy(xpath = "//html/ins/div/iframe[contains(@id, 'aswift_')]")
-	WebElement adParent_iFrame;
-
-	@FindBy(id = "ad_iframe")
-	WebElement adChild_iFrame;
-
-	@FindBy(xpath = "//div[@id='dismiss-button']/div")
-	WebElement dismissAdButton;
-
-	@FindBy(id = "loanamount")
-	WebElement loanAmount_textField;
-
-	@FindBy(id = "loaninterest")
-	WebElement loanInterest_textField;
-
-	@FindBy(id = "loanterm")
-	WebElement loanTenure_textField;
-
-	@FindBy(id = "loanfees")
-	WebElement fees_textField;
-
-	@FindBy(xpath = "//*[@id='loansummary-emi']/p/span")
-	WebElement loanEmi_value;
-
-	@FindBy(xpath = "//*[@id='loansummary-apr']/p/span")
-	WebElement loanApr_value;
-
-	@FindBy(xpath = "//*[@id='loansummary-totalinterest']/p/span")
-	WebElement totalInterest_value;
-
-	@FindBy(xpath = "//*[@id='loansummary-totalamount']/p/span")
-	WebElement totalPayment_value;
-
-	@FindBy(xpath="//*[@id='loanpaymenttable']/table/tbody/tr[1]")
-	WebElement loanPaymentTable_headerRow;
-	
-	@FindBy(xpath="//*[@id='loanpaymenttable']/table/tbody/tr[contains(@class, 'yearlypaymentdetails')]")
-	List<WebElement> loanPaymentTable_dataRows;
-
 	public void setLoanAmount(String amount) {
 		try {
-			System.out.println("💰 Entering Loan Amount: ₹" + amount);
+			loanAmount_textField = driver.findElement(LOAN_AMOUNT_TEXT_FIELD);
 			javascript.executeScript("arguments[0].value='" + 0 + "'", loanAmount_textField);
 			loanAmount_textField.sendKeys(amount);
-			waitLoad(1); // Visual delay
-			System.out.println("✅ Loan Amount entered successfully!");
 		} catch (Exception e) {
 			System.out.println("❌ ERROR: Failed to enter loan amount - " + e.getMessage());
 			reportFail(e.getMessage());
@@ -75,11 +63,9 @@ public class LoanCalculator extends PageBaseClass {
 
 	public void setLoanIntrest(String intrestRate) {
 		try {
-			System.out.println("📊 Entering Interest Rate: " + intrestRate + "%");
+			loanInterest_textField = driver.findElement(LOAN_INTEREST_TEXT_FIELD);
 			loanInterest_textField.clear();
-			loanInterest_textField.sendKeys("9.5");
-			waitLoad(1); // Visual delay
-			System.out.println("✅ Interest Rate entered successfully!");
+			loanInterest_textField.sendKeys(intrestRate);
 		} catch (Exception e) {
 			System.out.println("❌ ERROR: Failed to enter interest rate - " + e.getMessage());
 			reportFail(e.getMessage());
@@ -88,10 +74,8 @@ public class LoanCalculator extends PageBaseClass {
 
 	public void setLoanTenure(String tenure) {
 		try {
-			System.out.println("📅 Entering Loan Tenure: " + tenure + " year(s)");
+			loanTenure_textField = driver.findElement(LOAN_TENURE_TEXT_FIELD);
 			javascript.executeScript("arguments[0].value='" + tenure + "'", loanTenure_textField);
-			waitLoad(1); // Visual delay
-			System.out.println("✅ Loan Tenure entered successfully!");
 		} catch (Exception e) {
 			System.out.println("❌ ERROR: Failed to enter loan tenure - " + e.getMessage());
 			reportFail(e.getMessage());
@@ -100,11 +84,9 @@ public class LoanCalculator extends PageBaseClass {
 
 	public void setFees(String fees) {
 		try {
-			System.out.println("💵 Entering Fees & Charges: ₹" + fees);
+			fees_textField = driver.findElement(FEES_TEXT_FIELD);
 			fees_textField.clear();
 			fees_textField.sendKeys(fees);
-			waitLoad(1); // Visual delay
-			System.out.println("✅ Fees & Charges entered successfully!");
 		} catch (Exception e) {
 			System.out.println("❌ ERROR: Failed to enter fees - " + e.getMessage());
 			reportFail(e.getMessage());
@@ -112,91 +94,75 @@ public class LoanCalculator extends PageBaseClass {
 	}
 	
 	public void clickLoanAmountField() {
-		System.out.println("🖱️ Clicking Loan Amount field...");
+		loanAmount_textField = driver.findElement(LOAN_AMOUNT_TEXT_FIELD);
 		loanAmount_textField.click();
-		waitLoad(1); // Visual delay
-		System.out.println("✅ Clicked Loan Amount field!");
 	}
 
 	public void verifyLoanEmi(String expectedLoanEmi) {
 		try {
-			System.out.println("🔍 Verifying Loan EMI...");
+			loanEmi_value = driver.findElement(LOAN_EMI_VALUE);
 			String loanEmi = loanEmi_value.getText();
-			System.out.println("   Expected: " + expectedLoanEmi);
-			System.out.println("   Actual:   " + loanEmi);
 			Assert.assertEquals(loanEmi, expectedLoanEmi);
-			System.out.println("✅ Loan EMI verification passed!");
-			waitLoad(1); // Visual delay
 		} catch (Exception e) {
-			System.out.println("❌ ERROR: Loan EMI verification failed - " + e.getMessage());
+			String actual = loanEmi_value != null ? loanEmi_value.getText() : "Element not found";
+			System.out.println("❌ ERROR: Loan EMI verification failed - Expected: " + expectedLoanEmi + ", Actual: " + actual);
 			reportFail(e.getMessage());
 		}
 	}
 
 	public void verifyLoanApr(String expectedLoanApr) {
 		try {
-			System.out.println("🔍 Verifying Loan APR...");
+			loanApr_value = driver.findElement(LOAN_APR_VALUE);
 			String loanApr = loanApr_value.getText();
-			System.out.println("   Expected: " + expectedLoanApr);
-			System.out.println("   Actual:   " + loanApr);
 			Assert.assertEquals(loanApr, expectedLoanApr);
-			System.out.println("✅ Loan APR verification passed!");
-			waitLoad(1); // Visual delay
 		} catch (Exception e) {
-			System.out.println("❌ ERROR: Loan APR verification failed - " + e.getMessage());
+			String actual = loanApr_value != null ? loanApr_value.getText() : "Element not found";
+			System.out.println("❌ ERROR: Loan APR verification failed - Expected: " + expectedLoanApr + ", Actual: " + actual);
 			reportFail(e.getMessage());
 		}
 	}
 
 	public void verifyTotalInterest(String expectedTotalIntrest) {
 		try {
-			System.out.println("🔍 Verifying Total Interest...");
+			totalInterest_value = driver.findElement(TOTAL_INTEREST_VALUE);
 			String totalIntrest = totalInterest_value.getText();
-			System.out.println("   Expected: " + expectedTotalIntrest);
-			System.out.println("   Actual:   " + totalIntrest);
 			Assert.assertEquals(totalIntrest, expectedTotalIntrest);
-			System.out.println("✅ Total Interest verification passed!");
-			waitLoad(1); // Visual delay
 		} catch (Exception e) {
-			System.out.println("❌ ERROR: Total Interest verification failed - " + e.getMessage());
+			String actual = totalInterest_value != null ? totalInterest_value.getText() : "Element not found";
+			System.out.println("❌ ERROR: Total Interest verification failed - Expected: " + expectedTotalIntrest + ", Actual: " + actual);
 			reportFail(e.getMessage());
 		}
 	}
 
 	public void verifyTotaPayment(String expectedTotalPayment) {
 		try {
-			System.out.println("🔍 Verifying Total Payment...");
+			totalPayment_value = driver.findElement(TOTAL_PAYMENT_VALUE);
 			String totalPayment = totalPayment_value.getText();
-			System.out.println("   Expected: " + expectedTotalPayment);
-			System.out.println("   Actual:   " + totalPayment);
 			Assert.assertEquals(totalPayment, expectedTotalPayment);
-			System.out.println("✅ Total Payment verification passed!");
-			waitLoad(1); // Visual delay
 		} catch (Exception e) {
-			System.out.println("❌ ERROR: Total Payment verification failed - " + e.getMessage());
+			String actual = totalPayment_value != null ? totalPayment_value.getText() : "Element not found";
+			System.out.println("❌ ERROR: Total Payment verification failed - Expected: " + expectedTotalPayment + ", Actual: " + actual);
 			reportFail(e.getMessage());
 		}
 	}
 
 	public void handleAd() {
 		try {
-			System.out.println("🪟 Handling advertisement popup...");
+			adParent_iFrame = driver.findElement(AD_PARENT_IFRAME);
 			driver.switchTo().frame(adParent_iFrame);
+			adChild_iFrame = driver.findElement(AD_CHILD_IFRAME);
 			driver.switchTo().frame(adChild_iFrame);
+			dismissAdButton = driver.findElement(DISMISS_AD_BUTTON);
 			dismissAdButton.click();
-			driver.switchTo().parentFrame();
-			waitLoad(1); // Visual delay
-			System.out.println("✅ Advertisement closed successfully!");
+			driver.switchTo().defaultContent();
 		} catch (Exception e) {
-			System.out.println("⚠️ WARNING: Could not close ad (this is okay if ad doesn't appear) - " + e.getMessage());
-			// Don't fail the test if ad handling fails
+			driver.switchTo().defaultContent();
+			// Ad may not be present - silently continue
 		}
 	}
 	
 	public void extractDataFromTable(String sheetName) {
 		try {
-			System.out.println("\n📊 Extracting table data and storing in Excel...");
-			System.out.println("   Sheet Name: " + sheetName);
 			ExcelDataFile excelfile = new ExcelDataFile(
 					System.getProperty("user.dir") + "\\testdata\\TestOutputData.xlsx");
 
@@ -205,27 +171,24 @@ public class LoanCalculator extends PageBaseClass {
 			}
 			excelfile.addSheet(sheetName);
 
-			List<WebElement> columns = loanPaymentTable_headerRow.findElements(By.xpath("//th"));
+			loanPaymentTable_headerRow = driver.findElement(LOAN_PAYMENT_TABLE_HEADER_ROW);
+			List<WebElement> columns = loanPaymentTable_headerRow.findElements(TABLE_HEADER_COLUMNS);
 
 			int colNum = 1;
-			System.out.println("   Extracting headers...");
 			for (int i = 0; i < columns.size(); i++) {
 				if (!(columns.get(i).getText().isBlank() || columns.get(i).getText().isEmpty())) {
-					System.out.println("     Header: " + columns.get(i).getText());
 					excelfile.setCellData(sheetName, colNum, 1, columns.get(i).getText());
 					colNum++;
 				}
 			}
 
-			System.out.println("   Extracting data rows...");
+			loanPaymentTable_dataRows = driver.findElements(LOAN_PAYMENT_TABLE_DATA_ROWS);
 			for (int i = 0; i < loanPaymentTable_dataRows.size(); i++) {
 				columns = loanPaymentTable_dataRows.get(i).findElements(By.tagName("td"));
 				for (int j = 0; j < columns.size(); j++) {
 					excelfile.setCellData(sheetName, j + 1, i + 2, columns.get(j).getText());
 				}
 			}
-			System.out.println("✅ Data extracted and stored in Excel successfully!");
-			waitLoad(1); // Visual delay
 		} catch (Exception e) {
 			System.out.println("❌ ERROR: Failed to extract data - " + e.getMessage());
 			reportFail(e.getMessage());

@@ -39,15 +39,11 @@ public class BaseTestClass {
 				System.out.println("Chrome browser opened successfully!");
 			}
 			
-			waitLoad(1);
-			
 			// Only configure driver if it was successfully initialized
 			if (driver != null) {
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-				driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+				driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
 				driver.manage().window().maximize();
-				System.out.println("Browser window maximized!");
-				waitLoad(1);
 			} else {
 				throw new RuntimeException("Driver initialization failed - driver is null");
 			}
@@ -61,32 +57,22 @@ public class BaseTestClass {
 	
 	@AfterMethod
 	public void tearDown() {
-		System.out.println("\n==========================================");
-		System.out.println("🔒 CLOSING BROWSER");
-		System.out.println("==========================================\n");
 		if (driver != null) {
 			try {
-				System.out.println("⏳ Waiting 2 seconds before closing browser...");
-				waitLoad(2);
 				driver.quit();
-				System.out.println("✅ Browser closed successfully!");
 			} catch (Exception e) {
 				System.out.println("❌ Error closing browser: " + e.getMessage());
 				e.printStackTrace();
 			}
-		} else {
-			System.out.println("⚠️  No browser to close - driver was null");
 		}
-		System.out.println("==========================================\n");
 	}
 	
 	/* Holds the execution until page load */
 	public void waitForPageLoad() {
-		System.out.println("Waiting for page to load completely...");
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
 		int i = 0;
-		while(i != 180) {
+		while(i != 30) {
 			String pageState = (String) js.executeScript("return document.readyState;");
 			if(pageState.equals("complete")) {
 				break;
@@ -96,10 +82,8 @@ public class BaseTestClass {
 			i++;
 		}
 		
-		waitLoad(2);
-		
 		i = 0;
-		while(i != 180) {
+		while(i != 30) {
 			boolean jsState = (boolean) js.executeScript("return window.jQuery != undefined && jQuery.active == 0;");
 			if(jsState) {
 				break;
@@ -108,7 +92,6 @@ public class BaseTestClass {
 			}
 			i++;
 		}
-		System.out.println("Page loaded successfully!");
 	}
 	
 	/**
