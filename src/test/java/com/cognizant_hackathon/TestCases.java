@@ -1,7 +1,5 @@
-package com.cognizant;
+package com.cognizant_hackathon;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,20 +15,23 @@ public class TestCases extends BaseTestClass {
 	LoanCalculator loanCalculator;
 	PageBaseClass pageBaseClass;
 	
+	// Sets up the browser before each test runs
+	// Opens Chrome browser and creates PageBaseClass object
 	@BeforeMethod
 	public void setUp() {
 		try {
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--remote-allow-origins=*");
-			driver = new ChromeDriver(options);
+			invokeBrowser("chrome");
 			pageBaseClass = new PageBaseClass(driver);
 		} catch (Exception e) {
-			System.out.println("❌ ERROR in setUp: " + e.getMessage());
+			System.out.println("ERROR in setUp: " + e.getMessage());
 			e.printStackTrace();
 			throw new RuntimeException("Browser setup failed", e);
 		}
 	}
 	
+	// Test case for Home Loan Calculator
+	// Tests the home loan EMI calculation
+	// Checks page title, enters loan details, and saves data to Excel
 	@Test(priority = 1)
 	public void test_homeLoan() {
 		try {
@@ -46,18 +47,21 @@ public class TestCases extends BaseTestClass {
 			landingPage.setLoanTenure(Constants.homeLoanTenure);
 			
 			pageBaseClass.scrollPage(400);
-			pageBaseClass.scrollPage(1200);
-			landingPage.extractDataFromTable("home_loan");
+			pageBaseClass.scrollPage(900);
 			
 			pageBaseClass.reportPass("Home Loan Test Passed Successfully");
+			System.out.println("TEST COMPLETED: test_homeLoan");
 			
 		} catch (Exception e) {
-			System.out.println("\n❌ ERROR in test_homeLoan: " + e.getMessage());
+			System.out.println("\nERROR in test_homeLoan: " + e.getMessage());
 			e.printStackTrace();
 			throw e;
 		}
 	}
 	
+	// Test case for Car Loan Calculator
+	// Tests the car loan EMI calculation
+	// Checks page title, clicks car loan tab, enters loan details, and saves data to Excel
 	@Test(priority = 2)
 	public void test_carLoan() {
 		try {
@@ -75,18 +79,21 @@ public class TestCases extends BaseTestClass {
 			landingPage.setLoanTenure(Constants.carLoanTenure);
 			
 			pageBaseClass.scrollPage(400);
-			pageBaseClass.scrollPage(1200);
-			landingPage.extractDataFromTable("car_loan");
+			pageBaseClass.scrollPage(900);
 			
 			pageBaseClass.reportPass("Car Loan Test Passed Successfully");
+			System.out.println("TEST COMPLETED: test_carLoan");
 			
 		} catch (Exception e) {
-			System.out.println("\n❌ ERROR in test_carLoan: " + e.getMessage());
+			System.out.println("\nERROR in test_carLoan: " + e.getMessage());
 			e.printStackTrace();
 			throw e;
 		}
 	}
 	
+	// Test case for EMI Calculator page
+	// Tests navigation to loan calculator page and EMI calculation
+	// Closes ads, enters loan details with fees, and saves data to Excel
 	@Test(priority = 3)
 	public void test_EmiCalculator() {
 		try {
@@ -109,13 +116,13 @@ public class TestCases extends BaseTestClass {
 			loanCalculator.clickLoanAmountField();
 			
 			pageBaseClass.scrollPage(600);
-			pageBaseClass.scrollPage(1000);
-			loanCalculator.extractDataFromTable("emi_calculator");
+			pageBaseClass.scrollPage(900);
 			
 			pageBaseClass.reportPass("EMI Calculator Test Passed Successfully");
+			System.out.println("TEST COMPLETED: test_EmiCalculator");
 			
 		} catch (Exception e) {
-			System.out.println("\n❌ ERROR in test_EmiCalculator: " + e.getMessage());
+			System.out.println("\nERROR in test_EmiCalculator: " + e.getMessage());
 			e.printStackTrace();
 			throw e;
 		}

@@ -1,8 +1,6 @@
 baseclasses\PageBaseClass.class
-baseclasses\BaseTestClass.class
-utilities\ExtentReportManager.class
 utilities\Constants.class
-utilities\ExcelDataFile.class
 pageclasses\LandingPage.class
 utilities\DateUtils.class
+baseclasses\BaseTestClass.class
 pageclasses\LoanCalculator.class

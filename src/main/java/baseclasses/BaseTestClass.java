@@ -14,12 +14,8 @@ public class BaseTestClass {
 
 	public WebDriver driver;
 
-	/**
-	 * Opens the browser - You can see the browser opening visually!
-	 * 
-	 * @param 	browserName
-	 *			name of the browser to be opened (chrome, firefox, edge)
-	 */
+	// Opens the browser - You can see the browser opening visually!
+	// browserName can be "chrome", "firefox", or "edge"
 	public void invokeBrowser(String browserName) {
 		System.out.println("\n==========================================");
 		System.out.println("STEP: Opening " + browserName.toUpperCase() + " browser...");
@@ -55,19 +51,24 @@ public class BaseTestClass {
 		}
 	}
 	
+	// Closes the browser after each test finishes
+	// Quits the browser and cleans up
 	@AfterMethod
 	public void tearDown() {
 		if (driver != null) {
 			try {
 				driver.quit();
+				System.out.println("Browser closed successfully");
 			} catch (Exception e) {
-				System.out.println("❌ Error closing browser: " + e.getMessage());
+				System.out.println("Error closing browser: " + e.getMessage());
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	/* Holds the execution until page load */
+	// Waits for the page to fully load
+	// Checks if page is ready and all JavaScript is done
+	// Waits up to 30 seconds
 	public void waitForPageLoad() {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		
@@ -94,12 +95,8 @@ public class BaseTestClass {
 		}
 	}
 	
-	/**
-	 * Holds the execution for given time - This helps you see what's happening visually!
-	 * 
-	 * @param 	seconds
-	 * 			seconds to wait
-	 */
+	// Waits for the given number of seconds
+	// This helps you see what's happening on the screen
 	public void waitLoad(int seconds) {
 		try {
 			Thread.sleep(seconds * 1000);
